@@ -32,13 +32,13 @@ ul ul a {
 }
 
 #sidebar {
-  /* don't forget to add all the previously mentioned styles here too */
   background: #7386d5;
   color: #fff;
   transition: all 0.3s;
   min-width: 250px;
   max-width: 250px;
   min-height: 100vh;
+  position: relative;
 }
 
 #sidebar.active {
@@ -51,9 +51,12 @@ ul ul a {
   text-align: center;
 }
 
+#sidebar h3 {
+  margin-bottom: 0;
+}
+
 #sidebar ul.components {
   padding: 20px 0;
-  border-bottom: 1px solid #47748b;
 }
 
 #sidebar ul p {
@@ -62,7 +65,7 @@ ul ul a {
 }
 
 #sidebar ul li a {
-  padding: 10px 0 10px 30px;
+  padding: 10px 0 10px 20px;
   font-size: 1.1em;
   display: block;
 }
@@ -79,7 +82,16 @@ a[aria-expanded="true"] {
 }
 
 #sidebarCollapse {
-display: none;
+  display: none;
+}
+
+.copyright {
+  font-size: 0.8rem;
+  text-align: center;
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  margin-left: -55px;
 }
 
 .dropdown-toggle::after {
@@ -106,5 +118,5 @@ display: none;
 
   #sidebarCollapse {
     display: inline-block;
-    }
+  }
 }
