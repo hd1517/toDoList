@@ -1,17 +1,12 @@
 const mongoose = require("mongoose");
+const {itemsSchema} = require("./itemModel");
 
-// Schemas
-const Schema = mongoose.Schema;
-
-const itemsSchema = new Schema({
-  content: String,
-});
-
-const listSchema = new Schema({
+//Schemas
+const listSchema = {
   name: String,
   toDo: [itemsSchema],
-  done: [itemsSchema],
-});
+  done: [itemsSchema]
+};
 
 // Model
 const List = mongoose.model("List", listSchema);

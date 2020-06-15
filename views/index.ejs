@@ -5,10 +5,36 @@
 </div>
 
 <div>
-  <button type="button" id="sidebarCollapse" class="btn btn-info">
-    <i class="fas fa-align-left"></i>
-    <span>Toggle Sidebar</span>
-  </button>
+    <button type="button" id="sidebarCollapse" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Toggle Sidebar</span>
+      </button>
+</div>
+
+<div>
+    <ul>
+        <% listTitles.forEach(listTitle => { %>
+            <li><%= listTitle.name %></li>
+        <% }); %>
+    </ul>
+</div>
+
+<div>
+    <p>To Do</p>
+    <ul>
+        <% showList.toDo.forEach(toDo => { %>
+            <li><%= toDo.content %></li>
+        <% }); %>
+    </ul>
+</div>
+
+<div>
+    <p>Done</p>
+    <ul>
+        <% showList.done.forEach(done => { %>
+            <li><%= done.content %></li>
+        <% }); %>
+    </ul>
 </div>
 
 <%- include("partials/footer"); -%>
