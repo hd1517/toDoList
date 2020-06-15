@@ -20,9 +20,15 @@ const item4 = new Item({
 });
 
 const list1 = new List({
-    name: "To Do",
+    name: "Today",
     toDo: [item1, item2],
     done: [item3, item4]
+});
+
+const list2 = new List({
+    name: "Work",
+    toDo: [item4, item2],
+    done: [item3, item1 ]
 });
 
 const currentYear = new Date().getFullYear();
@@ -33,6 +39,7 @@ router.route("/").get((req, res) => {
     List.find({}, function (err, lists) {
         if (lists.length === 0) {
             list1.save();
+            list2.save();
             res.redirect("/");
         } else {
             List.findOne({}, function (err, foundList) {

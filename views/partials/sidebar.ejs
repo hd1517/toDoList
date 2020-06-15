@@ -5,17 +5,9 @@
 
   <ul class="list-unstyled components">
     <!-- <p>Lists</p> -->
-    
-    <li>
-      <a href="#">My Day</a>
-    </li>
-
-    <li>
-      <a href="#">Work</a>
-    </li>
-    <li>
-      <a href="#">Groceries</a>
-    </li>
+    <% listTitles.forEach(listTitle => { %>
+    <li><a href="#"><%= listTitle.name %></a></li>
+    <% }); %>
   </ul>
 
   <div class="copyright">

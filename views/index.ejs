@@ -12,14 +12,6 @@
 </div>
 
 <div>
-    <ul>
-        <% listTitles.forEach(listTitle => { %>
-            <li><%= listTitle.name %></li>
-        <% }); %>
-    </ul>
-</div>
-
-<div>
     <p>To Do</p>
     <ul>
         <% showList.toDo.forEach(toDo => { %>
@@ -35,6 +27,13 @@
             <li><%= done.content %></li>
         <% }); %>
     </ul>
+</div>
+
+<div>
+    <form action="/" method="post">
+    <input type="text" name="newItem" autocomplete="off">
+    <button type="submit">Add</button>
+</form>
 </div>
 
 <%- include("partials/footer"); -%>
