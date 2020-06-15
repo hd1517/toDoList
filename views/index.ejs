@@ -4,4 +4,30 @@
   <h1>Hello World</h1>
 </div>
 
+<div>
+    <ul>
+        <% listTitles.forEach(listTitle => { %>
+            <li><%= listTitle.name %></li>
+        <% }); %>
+    </ul>
+</div>
+
+<div>
+    <p>To Do</p>
+    <ul>
+        <% showList.toDo.forEach(toDo => { %>
+            <li><%= toDo.content %></li>
+        <% }); %>
+    </ul>
+</div>
+
+<div>
+    <p>Done</p>
+    <ul>
+        <% showList.done.forEach(done => { %>
+            <li><%= done.content %></li>
+        <% }); %>
+    </ul>
+</div>
+
 <%- include("partials/footer"); -%>

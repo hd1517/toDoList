@@ -10,7 +10,7 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // local database
-mongoose.connect("mongodb://localhost:27017/toDoDB", {
+mongoose.connect("mongodb://localhost:27017/todoDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
@@ -18,13 +18,9 @@ mongoose.connection.once("open", () => {
   console.log("MongoDB database connection established.");
 });
 
-const currentYear = new Date().getFullYear();
-
-app.get("/", (req, res) => {
-  res.render("index", {
-    currentYear: currentYear,
-  });
-});
+// Routes
+const listRouter = require("./routes/lists");
+app.use("/", listRouter);
 
 // listen
 app.listen(port, () => {
