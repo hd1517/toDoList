@@ -34,7 +34,7 @@ const list2 = new List({
 const currentYear = new Date().getFullYear();
 
 
-// Home page: SHOW LAST ADDED LIST
+// Home page: Will show last added list first
 router.route("/").get((req, res) => {
     List.find({}, function (err, lists) {
         if (lists.length === 0) {

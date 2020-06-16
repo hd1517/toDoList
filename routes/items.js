@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const router = require("express").Router();
 let List = require("../models/listModel");
 
-// ADD ITEM TO LIST
+// Add item to specific list depending on route parameter
 router.route("/addItem").post((req, res) => {
     const newItem = req.body.newItem;
     const forList = req.body.list;
