@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 const router = require("express").Router();
 let {Item} = require("../models/itemModel");
 let List = require("../models/listModel");
+const _ = require("lodash");
 
 const item1 = new Item({
     content: "Eat"
@@ -51,6 +52,25 @@ router.route("/").get((req, res) => {
             });
         }
 
+    });
+});
+
+// Add New List
+router.route("/addNewList").post((req, res) => {
+    let newTitle = _.capitalize(req.body.newListTitle);
+        formattedTitle = newTitle.replace(/[^a-zA-Z0-9]/g, '_');
+        formattedTitle = _.lowerCase(formattedTitle);
+    
+    List.findOne({ formattedName: formattedTitle }, function (err, listExists) {
+        if (!listExists) {
+            const list = new List({
+                name: newTitle,
+                formattedName: formattedTitle
+            });
+
+            list.save();
+            res.redirect("/" + formattedTitle);
+        }
     });
 });
 
