@@ -25,12 +25,14 @@ const item4 = new Item({
 
 const list1 = new List({
     name: "Today",
+    formattedName: "today",
     toDo: [item1, item2],
     done: [item3, item4]
 });
 
 const list2 = new List({
     name: "Work",
+    formattedName: "work",
     toDo: [item4, item2],
     done: [item3, item1 ]
 });
