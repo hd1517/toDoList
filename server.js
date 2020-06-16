@@ -20,7 +20,9 @@ mongoose.connection.once("open", () => {
 
 // Routes
 const listRouter = require("./routes/lists");
+const itemsRouter = require("./routes/items");
 app.use("/", listRouter);
+app.use("/", itemsRouter);
 
 // listen
 app.listen(port, () => {

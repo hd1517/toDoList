@@ -54,22 +54,4 @@ router.route("/").get((req, res) => {
     });
 });
 
-
-// ADD ITEM TO LIST
-router.route("/").post((req, res) => {
-    const newItem = req.body.newItem;
-    const forList = req.body.list;
-
-    List.findOne({ name: forList }, function (err, addToList) {
-        const item = {
-            content: newItem,
-        }
-        addToList.toDo.push(item);
-        addToList.save();
-    });
-
-res.redirect("/");
-});
-
-
 module.exports = router;
