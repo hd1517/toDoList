@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
-let {Item} = require("../models/itemModel");
-let List = require("../models/listModel");
+const {Item} = require("../models/itemModel");
+const List = require("../models/listModel");
+const _ = require("lodash");
+
+let errorMsg = "";
+let urlParam = "";
 
 const item1 = new Item({
     content: "Eat"
@@ -33,8 +37,7 @@ const list2 = new List({
 
 const currentYear = new Date().getFullYear();
 
-
-// Home page: Will show last added list first
+// Home page
 router.route("/").get((req, res) => {
     List.find({}, function (err, lists) {
         if (lists.length === 0) {
@@ -46,7 +49,9 @@ router.route("/").get((req, res) => {
                 res.render("index", {
                     currentYear: currentYear,
                     listTitles: lists,
-                    showList: foundList
+                    showList: foundList,
+                    errorMsg: errorMsg,
+                    urlParam: urlParam
                 });
             });
         }
@@ -54,7 +59,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-// Show specific list
+// Show list items using parameters
 router.route("/:listName").get((req, res) => {
     const urlTitle = req.params.listName;
 
@@ -66,12 +71,45 @@ router.route("/:listName").get((req, res) => {
                 res.render("index", {
                     currentYear: currentYear,
                     listTitles: listTitles,
-                    showList: thisList
+                    showList: thisList,
+                    errorMsg: errorMsg,
+                    urlParam: urlParam
                 });
             }
         });
     });
 });
 
+// Add New List
+router.route("/addNewList").post((req, res) => {
+    let newTitle = _.capitalize(req.body.newListTitle);
+        lowerCaseTitle = _.lowerCase(newTitle);
+        formattedTitle = lowerCaseTitle.replace(/[^a-zA-Z0-9]/g, '_');
+
+        console.log(newTitle, lowerCaseTitle, formattedTitle);
+    
+    List.findOne({ formattedName: formattedTitle }, function (err, listExists) {
+        if (!listExists) {
+            const list = new List({
+                name: newTitle,
+                formattedName: formattedTitle
+            });
+
+            list.save();
+            res.redirect("/" + formattedTitle);
+        } else {
+            errorMsg = "A list with this title already exists, you have now been redirected.";
+            urlParam = formattedTitle;
+            res.redirect("/" + formattedTitle);
+        }
+    });
+});
+
+router.route("/redirect").post((req, res) => {
+    if (errorMsg != "") {
+        errorMsg = "";
+        res.redirect("/" + urlParam);
+    }
+});
 
 module.exports = router;
