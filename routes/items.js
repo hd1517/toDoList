@@ -7,7 +7,7 @@ router.route("/addItem").post((req, res) => {
     const newItem = req.body.newItem;
     const forList = req.body.list;
 
-    List.findOne({ name: forList }, function (err, addToList) {
+    List.findOne({ formattedName: forList }, function (err, addToList) {
         const item = {
             content: newItem,
         }
@@ -15,7 +15,7 @@ router.route("/addItem").post((req, res) => {
         addToList.save();
     });
 
-res.redirect("/");
+res.redirect("/" + forList);
 });
 
 

@@ -34,7 +34,7 @@ const list2 = new List({
 const currentYear = new Date().getFullYear();
 
 
-// SHOW LIST
+// Home page: SHOW LAST ADDED LIST
 router.route("/").get((req, res) => {
     List.find({}, function (err, lists) {
         if (lists.length === 0) {
@@ -53,5 +53,25 @@ router.route("/").get((req, res) => {
 
     });
 });
+
+// Show specific list
+router.route("/:listName").get((req, res) => {
+    const urlTitle = req.params.listName;
+
+    List.find({}, (err, listTitles) => {
+        List.findOne({formattedName: urlTitle}, (err, thisList) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.render("index", {
+                    currentYear: currentYear,
+                    listTitles: listTitles,
+                    showList: thisList
+                });
+            }
+        });
+    });
+});
+
 
 module.exports = router;
