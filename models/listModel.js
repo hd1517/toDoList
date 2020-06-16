@@ -4,6 +4,7 @@ const {itemsSchema} = require("./itemModel");
 //Schemas
 const listSchema = {
   name: String,
+  formattedName: String,
   toDo: [itemsSchema],
   done: [itemsSchema]
 };
