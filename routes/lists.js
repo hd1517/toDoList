@@ -34,7 +34,7 @@ const list2 = new List({
 const currentYear = new Date().getFullYear();
 
 
-// READ
+// SHOW LIST
 router.route("/").get((req, res) => {
     List.find({}, function (err, lists) {
         if (lists.length === 0) {
@@ -54,6 +54,22 @@ router.route("/").get((req, res) => {
     });
 });
 
+
+// ADD ITEM TO LIST
+router.route("/").post((req, res) => {
+    const newItem = req.body.newItem;
+    const forList = req.body.list;
+
+    List.findOne({ name: forList }, function (err, addToList) {
+        const item = {
+            content: newItem,
+        }
+        addToList.toDo.push(item);
+        addToList.save();
+    });
+
+res.redirect("/");
+});
 
 
 module.exports = router;
