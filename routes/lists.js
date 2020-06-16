@@ -87,8 +87,6 @@ router.route("/addNewList").post((req, res) => {
     let newTitle = _.capitalize(req.body.newListTitle);
         lowerCaseTitle = _.lowerCase(newTitle);
         formattedTitle = lowerCaseTitle.replace(/[^a-zA-Z0-9]/g, '_');
-
-        console.log(newTitle, lowerCaseTitle, formattedTitle);
     
     List.findOne({ formattedName: formattedTitle }, function (err, listExists) {
         if (!listExists) {

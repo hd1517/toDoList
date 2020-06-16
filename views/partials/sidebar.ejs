@@ -1,4 +1,8 @@
 <nav id="sidebar">
+  <div id="dismiss" class="showSidebar">
+    <i id="dismissArrow" class="fas fa-arrow-left"></i>
+  </div>
+
   <div class="sidebar-header">
     <h3>My Lists</h3>
   </div>
@@ -8,7 +12,15 @@
     <% listTitles.forEach(listTitle => { %>
     <li><a href="/<%= listTitle.formattedName %>"><%= listTitle.name %></a></li>
     <% }); %>
-    <li><a href="#newListTitleModal" data-toggle="modal" data-target="#newListTitleModal">+  New List</a></li>
+    <li>
+      <a
+        href="#newListTitleModal"
+        data-toggle="modal"
+        data-target="#newListTitleModal"
+        id="addNewListLink"
+        >+ New List</a
+      >
+    </li>
   </ul>
 
   <div class="copyright">
