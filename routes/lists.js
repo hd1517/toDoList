@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const router = require("express").Router();
-let {Item} = require("../models/itemModel");
-let List = require("../models/listModel");
+const {Item} = require("../models/itemModel");
+const List = require("../models/listModel");
 const _ = require("lodash");
+
+let errorMsg = "";
+let urlParam = "";
 
 const item1 = new Item({
     content: "Eat"
@@ -47,7 +50,9 @@ router.route("/").get((req, res) => {
                 res.render("index", {
                     currentYear: currentYear,
                     listTitles: lists,
-                    showList: foundList
+                    showList: foundList,
+                    errorMsg: errorMsg,
+                    urlParam: urlParam
                 });
             });
         }
@@ -58,8 +63,10 @@ router.route("/").get((req, res) => {
 // Add New List
 router.route("/addNewList").post((req, res) => {
     let newTitle = _.capitalize(req.body.newListTitle);
-        formattedTitle = newTitle.replace(/[^a-zA-Z0-9]/g, '_');
-        formattedTitle = _.lowerCase(formattedTitle);
+        lowerCaseTitle = _.lowerCase(newTitle);
+        formattedTitle = lowerCaseTitle.replace(/[^a-zA-Z0-9]/g, '_');
+
+        console.log(newTitle, lowerCaseTitle, formattedTitle);
     
     List.findOne({ formattedName: formattedTitle }, function (err, listExists) {
         if (!listExists) {
@@ -70,8 +77,19 @@ router.route("/addNewList").post((req, res) => {
 
             list.save();
             res.redirect("/" + formattedTitle);
+        } else {
+            errorMsg = "A list with this title already exists, you will now be redirected.";
+            urlParam = formattedTitle;
+            //res.redirect("/" + formattedTitle);
         }
     });
+});
+
+router.route("/redirect").post((req, res) => {
+    if (errorMsg != "") {
+        errorMsg = "";
+        res.redirect("/" + urlParam);
+    }
 });
 
 module.exports = router;
