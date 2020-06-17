@@ -26,7 +26,7 @@
         <!-- Delete Item form -->
         <form action="/delete" method="post">
             <input type="hidden" name="deleteID" value="<%= toDo._id %>">
-            <input type="hidden" name="deleteListName" value="<%= showList.name %>">
+            <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
             <button type="submit" class="close" name="deleteFrom" value="toDo" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
