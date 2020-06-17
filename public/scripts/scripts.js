@@ -25,7 +25,11 @@ $(document).ready(function () {
 
     if ($('.errorMsg').text() != "") {
         $('#errorModal').modal("show");
-      }
+    }
+
+    if (!$(".doneItems")[0]){
+        $(".doneBox").hide();
+    } 
 
     
 

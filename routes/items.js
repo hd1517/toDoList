@@ -18,7 +18,7 @@ router.route("/addItem").post((req, res) => {
   res.redirect("/" + forList);
 });
 
-// Move to-do item to done
+// Move toDo item to done
 router.route("/done").post((req, res) => {
   const checkedItemId = req.body.checkbox;
   const formattedName = req.body.listName;
@@ -36,20 +36,22 @@ router.route("/done").post((req, res) => {
   );
 });
 
-
 // Move done items back to toDo if checkbox checked
 router.route("/toDoAgain").post((req, res) => {
-    const checkItemID = req.body.doneID;
-    const formattedName = req.body.doneListName;
-    const toDoContent = req.body.doneContent;
+  const checkedItemId = req.body.doneID;
+  const formattedName = req.body.doneListName;
+  const content = req.body.doneContent;
 
-    List.findOneAndUpdate({formattedName: formattedName}, {
-        $push: {toDo: {_id: checkItemID, content: toDoContent}},
-        $pull: {done: {_id: checkItemID}}
-    }, function(err){
-        res.redirect("/" + formattedName);
-      });
+  List.findOneAndUpdate(
+    { formattedName: formattedName },
+    {
+      $push: { toDo: { _id: checkedItemId, content: content } },
+      $pull: { done: { _id: checkedItemId } },
+    },
+    function (err) {
+      res.redirect("/" + formattedName);
+    }
+  );
 });
-
 
 module.exports = router;
