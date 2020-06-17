@@ -176,7 +176,7 @@ a[aria-expanded="true"] {
   width: 100%;
 }
 
-.item form {
+.inputForm {
   width: 100%;
 }
 
@@ -220,6 +220,16 @@ input[type="text"]:focus {
 
 .doneItems:last-child {
   padding-bottom: 20px;
+}
+
+.close {
+  position: relative;
+  right: 22px;
+  display: none;
+}
+
+.close:focus {
+  outline: none;
 }
 
 @media (max-width: 768px) {

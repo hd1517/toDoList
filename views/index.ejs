@@ -17,17 +17,25 @@
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item">
-        <form action="/done" method="post">
+        <form action="/done" method="post" class="inputForm">
             <input type="checkbox" name="checkbox" value="<%= toDo._id %>" onchange="this.form.submit()">
             <input type="text" value="<%= toDo.content %>" />
             <input type="hidden" name="toDoContent" value="<%= toDo.content %>">
             <input type="hidden" name="listName" value="<%= showList.formattedName %>">
-        </form>        
+        </form>
+        <!-- Delete Item form -->
+        <form action="/delete" method="post">
+            <input type="hidden" name="deleteID" value="<%= toDo._id %>">
+            <input type="hidden" name="deleteListName" value="<%= showList.name %>">
+            <button type="submit" class="close" name="deleteFrom" value="toDo" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </form>
     </div>
     <% }); %>
     <!-- Add New Item Input -->
     <div class="toDoItems item addNewItem">
-      <form action="/addItem" method="post" class="item">
+      <form action="/addItem" method="post" class="item inputForm">
         <span class="plus">&#65291</span>
         <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="Add new item"/>
         <button type="submit" class="btn btn-dark addNewBtn" name="list" value="<%= showList.formattedName %>">&#65291</button>
