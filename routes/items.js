@@ -60,6 +60,7 @@ router.route("/delete").post((req, res) => {
   const deleteListName = req.body.deleteListName;
   const deleteFrom = req.body.deleteFrom;
 
+  if (deleteFrom === "toDo") {
     List.findOneAndUpdate(
       { formattedName: deleteListName },
       {
@@ -69,7 +70,19 @@ router.route("/delete").post((req, res) => {
         res.redirect("/" + deleteListName);
       }
     );
+  }
 
+  if (deleteFrom === "done") {
+    List.findOneAndUpdate(
+      { formattedName: deleteListName },
+      {
+        $pull: { done: { _id: deleteID } },
+      },
+      function (err) {
+        res.redirect("/" + deleteListName);
+      }
+    );
+  }
 });
 
 module.exports = router;

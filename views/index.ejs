@@ -49,16 +49,26 @@
         <h4>Completed Tasks</h4>
     </div>
     <% showList.done.forEach(function(done){ %>
-    <div class="doneItems">
-        <form class="item" action="/toDoAgain" method="post">
+    <div class="doneItems item">
+        <form class="inputForm" action="/toDoAgain" method="post">
             <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
-            <p class="done"><%= done.content %></p>
+            <input type="text" class="done" value="<%= done.content %>" />
             <input type="hidden" name="doneID" value="<%= done._id %>">
             <input type="hidden" name="doneContent" value="<%= done.content %>">
             <input type="hidden" name="doneListName" value="<%= showList.formattedName %>">
-        </form>       
+        </form>
+        <!-- Delete Item form -->
+        <form action="/delete" method="post">
+            <input type="hidden" name="deleteID" value="<%= done._id %>">
+            <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
+            <button type="submit" class="close" name="deleteFrom" value="done" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </form>
+              
     </div>
     <% }); %>
+    <div class="item">&nbsp</div> 
   </div>
 
 </div>
