@@ -61,7 +61,7 @@ router.route("/").get((req, res) => {
     });
 });
 
-// Show list items using parameters
+// Show list using parameters
 router.route("/:listName").get((req, res) => {
     const urlTitle = req.params.listName;
 
@@ -105,11 +105,13 @@ router.route("/addNewList").post((req, res) => {
     });
 });
 
+// If user tries to add new list title that already exists, redirect
 router.route("/redirect").post((req, res) => {
     if (errorMsg != "") {
         errorMsg = "";
         res.redirect("/" + urlParam);
     }
 });
+
 
 module.exports = router;

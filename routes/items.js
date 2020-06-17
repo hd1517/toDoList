@@ -4,19 +4,36 @@ let List = require("../models/listModel");
 
 // Add item to specific list depending on route parameter
 router.route("/addItem").post((req, res) => {
-    const newItem = req.body.newItem;
-    const forList = req.body.list;
+  const newItem = req.body.newItem;
+  const forList = req.body.list;
 
-    List.findOne({ formattedName: forList }, function (err, addToList) {
-        const item = {
-            content: newItem,
-        }
-        addToList.toDo.push(item);
-        addToList.save();
-    });
+  List.findOne({ formattedName: forList }, function (err, addToList) {
+    const item = {
+      content: newItem,
+    };
+    addToList.toDo.push(item);
+    addToList.save();
+  });
 
-res.redirect("/" + forList);
+  res.redirect("/" + forList);
 });
 
+// Move to-do item to done
+router.route("/done").post((req, res) => {
+  const checkedItemId = req.body.checkbox;
+  const formattedName = req.body.listName;
+  const content = req.body.toDoContent;
+
+  List.findOneAndUpdate(
+    { formattedName: formattedName },
+    {
+      $push: { done: { _id: checkedItemId, content: content } },
+      $pull: { toDo: { _id: checkedItemId } },
+    },
+    function (err) {
+      res.redirect("/" + formattedName);
+    }
+  );
+});
 
 module.exports = router;

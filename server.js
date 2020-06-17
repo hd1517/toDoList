@@ -13,6 +13,7 @@ app.set("view engine", "ejs");
 mongoose.connect("mongodb://localhost:27017/todoDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false
 });
 mongoose.connection.once("open", () => {
   console.log("MongoDB database connection established.");

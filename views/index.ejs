@@ -17,18 +17,19 @@
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item">
-        <input
-          type="checkbox"
-          name="checkbox">
-        <input type="text" value="<%= toDo.content %>" />
-      </form>
+        <form action="/done" method="post" class="item">
+            <input type="checkbox" name="checkbox" value="<%= toDo._id %>" onchange="this.form.submit()">
+            <input type="text" value="<%= toDo.content %>" />
+            <input type="hidden" name="toDoContent" value="<%= toDo.content %>">
+            <input type="hidden" name="listName" value="<%= showList.formattedName %>">
+        </form>        
     </div>
     <% }); %>
     <!-- Add New Item Input -->
     <div class="toDoItems item addNewItem">
       <form action="/addItem" method="post" class="item">
         <span class="plus">&#65291</span>
-        <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="List item"/>
+        <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="Add new item"/>
         <button type="submit" class="btn btn-dark addNewBtn" name="list" value="<%= showList.formattedName %>">&#65291</button>
       </form>
     </div>
