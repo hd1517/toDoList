@@ -1,8 +1,16 @@
-@import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
+@import "https://fonts.googleapis.com/css?family=Dancing+Script&family=Poppins:300,400,500,600,700";
 
 body {
   font-family: "Poppins", sans-serif;
   background: #fafafa;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Dancing Script", cursive;
+  margin: 0;
 }
 
 p {
@@ -29,6 +37,10 @@ ul ul a {
   font-size: 0.9em !important;
   padding-left: 30px !important;
   background: #6d7fcc;
+}
+
+#content {
+  width: 100%;
 }
 
 #sidebar {
@@ -137,9 +149,78 @@ a[aria-expanded="true"] {
   align-items: stretch;
 }
 
+#listContainer {
+  max-width: 540px;
+  margin-top: 30px;
+}
 
+.box {
+  margin: 30px auto;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
+}
 
+.headers {
+  border-bottom: 1px solid #f1f1f1;
+  text-align: center;
+  padding: 15px;
+  margin: 0;
+}
 
+.item {
+  min-height: 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f1f1f1;
+  width: 100%;
+}
+
+.item form {
+  width: 100%;
+}
+
+.item p {
+  margin: 0;
+  color: #00204a;
+}
+
+input[type="checkbox"] {
+  margin: 15px;
+}
+
+input[type="text"] {
+  border: none;
+  background: transparent;
+  width: 80%;
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.addNewBtn {
+  margin: auto;
+  padding: 3px 8px;
+}
+
+.addNewItem {
+  padding-bottom: 20px;
+}
+
+.plus {
+  margin: 10px 14px;
+}
+
+.done {
+  font-size: 1rem;
+  text-decoration: line-through;
+  text-decoration-color: grey;
+}
+
+.doneItems:last-child {
+  padding-bottom: 20px;
+}
 
 @media (max-width: 768px) {
   #sidebar {
@@ -151,5 +232,11 @@ a[aria-expanded="true"] {
 
   .showSidebar {
     display: inline-block;
+  }
+}
+
+@media (max-width: 530px) {
+  .addNewBtn {
+    margin: 0 5px;
   }
 }

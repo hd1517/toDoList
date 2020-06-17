@@ -1,39 +1,54 @@
 <%- include("partials/header"); -%>
 
 <div>
-  <h1><%= showList.name %></h1>
+  <button type="button" id="sidebarBtn" class="showSidebar btn btn-info">
+    <i class="fas fa-align-left"></i>
+    <span></span>
+  </button>
 </div>
 
-<div>
-    <button type="button" id="sidebarBtn" class="showSidebar btn btn-info">
-        <i class="fas fa-align-left"></i>
-        <span>Toggle Sidebar</span>
-      </button>
-</div>
+<div class="container" id="listContainer">
+    <!-- Box for list title and things to do -->
+  <div class="box">
+      <!-- List Title -->
+    <div class="headers">
+      <h1><%= showList.name %></h1>
+    </div>
+    <!-- To Do Items -->
+    <% showList.toDo.forEach(function(toDo){ %>
+    <div class="toDoItems item">
+        <input
+          type="checkbox"
+          name="checkbox">
+        <input type="text" value="<%= toDo.content %>" />
+      </form>
+    </div>
+    <% }); %>
+    <!-- Add New Item Input -->
+    <div class="toDoItems item addNewItem">
+      <form action="/addItem" method="post" class="item">
+        <span class="plus">&#65291</span>
+        <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="List item"/>
+        <button type="submit" class="btn btn-dark addNewBtn" name="list" value="<%= showList.formattedName %>">&#65291</button>
+      </form>
+    </div>
+  </div>
 
-<div>
-    <p>To Do</p>
-    <ul>
-        <% showList.toDo.forEach(toDo => { %>
-            <li><%= toDo.content %></li>
-        <% }); %>
-    </ul>
-</div>
+  <!-- Done items -->
+  <div class="box">
+    <div class="headers">
+        <h4>Completed Tasks</h4>
+    </div>
+    <% showList.done.forEach(function(done){ %>
+    <div class="doneItems ">
+        <div class="item">
+            <input type="checkbox" name="doneCheck" checked>
+        <p class="done"><%= done.content %></p>
+        </div>        
+    </div>
+    <% }); %>
+  </div>
 
-<div>
-    <p>Done</p>
-    <ul>
-        <% showList.done.forEach(done => { %>
-            <li><%= done.content %></li>
-        <% }); %>
-    </ul>
-</div>
-
-<div>
-    <form action="/addItem" method="post">
-    <input type="text" name="newItem" autocomplete="off">
-    <button type="submit" name="list" value="<%= showList.formattedName %>">Add</button>
-</form>
 </div>
 
 <%- include("partials/footer"); -%>
