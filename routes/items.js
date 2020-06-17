@@ -36,4 +36,20 @@ router.route("/done").post((req, res) => {
   );
 });
 
+
+// Move done items back to toDo if checkbox checked
+router.route("/toDoAgain").post((req, res) => {
+    const checkItemID = req.body.doneID;
+    const formattedName = req.body.doneListName;
+    const toDoContent = req.body.doneContent;
+
+    List.findOneAndUpdate({formattedName: formattedName}, {
+        $push: {toDo: {_id: checkItemID, content: toDoContent}},
+        $pull: {done: {_id: checkItemID}}
+    }, function(err){
+        res.redirect("/" + formattedName);
+      });
+});
+
+
 module.exports = router;

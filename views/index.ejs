@@ -17,7 +17,7 @@
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item">
-        <form action="/done" method="post" class="item">
+        <form action="/done" method="post">
             <input type="checkbox" name="checkbox" value="<%= toDo._id %>" onchange="this.form.submit()">
             <input type="text" value="<%= toDo.content %>" />
             <input type="hidden" name="toDoContent" value="<%= toDo.content %>">
@@ -41,11 +41,14 @@
         <h4>Completed Tasks</h4>
     </div>
     <% showList.done.forEach(function(done){ %>
-    <div class="doneItems ">
-        <div class="item">
-            <input type="checkbox" name="doneCheck" checked>
-        <p class="done"><%= done.content %></p>
-        </div>        
+    <div class="doneItems">
+        <form class="item" action="/toDoAgain" method="post">
+            <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
+            <p class="done"><%= done.content %></p>
+            <input type="hidden" name="doneID" value="<%= done._id %>">
+            <input type="hidden" name="doneContent" value="<%= done.content %>">
+            <input type="hidden" name="doneListName" value="<%= showList.formattedName %>">
+        </form>       
     </div>
     <% }); %>
   </div>
