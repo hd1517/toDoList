@@ -59,7 +59,7 @@ $(document).ready(function () {
     $("#confirmDelete").modal("show");
   });
 
-  // Edit on outside click
+  // On input change
   $("input").change(function () {
       let inputArea = $(this).attr("class");
 
@@ -67,7 +67,9 @@ $(document).ready(function () {
           $(this).parent().attr("action", "/editToDo").submit();
       } else if (inputArea === "done") {
           $(this).parent().attr("action", "/editDone").submit();
-      } 
+      } else if (inputArea === "newItem") {
+          $(this).parent().submit();
+      }
     
     
   });
