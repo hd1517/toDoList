@@ -19,7 +19,7 @@
     <div class="toDoItems item">
         <form action="/done" method="post" class="inputForm">
             <input type="checkbox" onchange="this.form.submit()">
-            <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>"/>       
+            <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>" autocomplete="off"/>       
             <input type="hidden" name="itemID" value="<%= toDo._id %>"> 
             <input type="hidden" name="listName" value="<%= showList.formattedName %>">
         </form>
@@ -53,7 +53,7 @@
     <div class="doneItems item">
         <form class="inputForm" action="/toDoAgain" method="post">
             <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
-            <input type="text" name="doneContent" class="done" value="<%= done.content %>" />
+            <input type="text" name="doneContent" class="done" value="<%= done.content %>" autocomplete="off"/>
             <input type="hidden" name="doneID" value="<%= done._id %>">
             <input type="hidden" name="doneListName" value="<%= showList.formattedName %>">
         </form>

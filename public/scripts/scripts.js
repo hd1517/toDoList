@@ -65,6 +65,8 @@ $(document).ready(function () {
 
       if (inputArea === "toDo") { 
           $(this).parent().attr("action", "/editToDo").submit();
+      } else if (inputArea === "done") {
+          $(this).parent().attr("action", "/editDone").submit();
       } 
     
     
