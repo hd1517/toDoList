@@ -124,5 +124,21 @@ router.route("/deleteList").post((req, res) => {
     });
 })
 
+// Update list title
+router.route("/editTitle").post((req, res) => {
+    let newTitle = req.body.newListTitle;
+    let newFormattedName = _.lowerCase(newTitle).replace(/[^a-zA-Z0-9]/g, '_');
+    const oldFormattedName = req.body.formattedTitle;
+
+    List.findOneAndUpdate(
+        { formattedName: oldFormattedName},
+        { name : newTitle, formattedName: newFormattedName },
+        function (err) {
+          res.redirect("/" + newFormattedName);
+        }
+      ); 
+
+})
+
 
 module.exports = router;

@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    $(".newItem").focus();
+
   // Hide sidebar
   $("#dismiss, .overlay").on("click", function () {
     // hide sidebar
@@ -69,9 +71,11 @@ $(document).ready(function () {
           $(this).parent().attr("action", "/editDone").submit();
       } else if (inputArea === "newItem") {
           $(this).parent().submit();
+      } else if (inputArea === "listTitleInput") {
+          $(this).parent().submit();
       }
-    
-    
   });
+
+
 
 });

@@ -169,6 +169,10 @@ a[aria-expanded="true"] {
   margin: 0;
 }
 
+.headers h4 {
+  cursor: default;
+}
+
 .item {
   min-height: 30px;
   display: flex;
@@ -251,8 +255,11 @@ input[type="text"]:focus {
   padding: 10px;
 }
 
-
-
+.listTitleInput {
+  text-align: center;
+  font-size: 2.8rem;
+  font-family: "Dancing Script", cursive;
+}
 
 @media (max-width: 768px) {
   #sidebar {

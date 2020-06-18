@@ -12,7 +12,12 @@
   <div class="box">
       <!-- List Title -->
     <div class="headers">
-      <h1><%= showList.name %></h1>
+      <h1></h1>
+      <form action="/editTitle" method="post">
+        <input type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off">
+        <input type="hidden" name="formattedTitle" value="<%= showList.formattedName %>">
+      </form>
+      
     </div>
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
