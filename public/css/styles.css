@@ -81,6 +81,7 @@ ul ul a {
   padding: 10px 0 10px 20px;
   font-size: 1.1em;
   display: block;
+  position: relative;
 }
 
 #sidebar ul li a:hover {
@@ -230,6 +231,14 @@ input[type="text"]:focus {
 
 .close:focus {
   outline: none;
+}
+
+#deleteList {
+  position: absolute;
+  right: 20px;
+  top: 6px;
+  font-size: 1.5rem;
+  display: none;
 }
 
 @media (max-width: 768px) {

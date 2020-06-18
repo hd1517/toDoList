@@ -35,5 +35,14 @@ $(document).ready(function () {
     }
   );
 
+  $(".listTitleLink").hover(
+    function () {
+      $(this).find("#deleteList").show();
+    },
+    function () {
+      $(this).find("#deleteList").hide();
+    }
+  );
 
+  
 });
