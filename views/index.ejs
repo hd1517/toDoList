@@ -19,7 +19,7 @@
     <div class="toDoItems item">
         <form action="/done" method="post" class="inputForm">
             <input type="checkbox" name="checkbox" value="<%= toDo._id %>" onchange="this.form.submit()">
-            <input type="text" value="<%= toDo.content %>" />
+            <input type="text" class="toDo" value="<%= toDo.content %>" />
             <input type="hidden" name="toDoContent" value="<%= toDo.content %>">
             <input type="hidden" name="listName" value="<%= showList.formattedName %>">
         </form>

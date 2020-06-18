@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Hide sidebar
+  // Hide sidebar
   $("#dismiss, .overlay").on("click", function () {
     // hide sidebar
     $("#sidebar").removeClass("active");
@@ -51,13 +51,26 @@ $(document).ready(function () {
   );
 
   // Delete list on close icon click
-  $('.deleteList').click(function () {
-      let toDelete = $(this).siblings('.listID').val();
-      let title = $(this).siblings('.titleOfList').text();
-      $('.listToDelete').attr('value', toDelete);
-      $('#titleToDelete').text(title);
-      $('#confirmDelete').modal("show");
+  $(".deleteList").click(function () {
+    let toDelete = $(this).siblings(".listID").val();
+    let title = $(this).siblings(".titleOfList").text();
+    $(".listToDelete").attr("value", toDelete);
+    $("#titleToDelete").text(title);
+    $("#confirmDelete").modal("show");
   });
 
-  
+  // Edit on outside click
+    $(document).click(function(event) {
+      $targetClass = $(event.target).attr("class");
+      //console.log($targetClass);
+
+ if ($targetClass === "toDo") {
+     console.log("Update toDo");
+ } else if ($targetClass === "done") {
+    console.log("Update done");
+} else {
+    console.log("outside");
+}
+
+    });
 });
