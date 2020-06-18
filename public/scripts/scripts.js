@@ -61,7 +61,11 @@ $(document).ready(function () {
 
   // Edit on outside click
   $("input").change(function () {
-      console.log($(this).attr("class"));
+      let inputArea = $(this).attr("class");
+
+      if (inputArea === "toDo") { 
+          $(this).parent().attr("action", "/editToDo").submit();
+      } 
     
     
   });

@@ -20,7 +20,7 @@ router.route("/addItem").post((req, res) => {
 
 // Move toDo item to done
 router.route("/done").post((req, res) => {
-  const checkedItemId = req.body.checkbox;
+  const checkedItemId = req.body.itemID;
   const formattedName = req.body.listName;
   const content = req.body.toDoContent;
 
@@ -84,5 +84,23 @@ router.route("/delete").post((req, res) => {
     );
   }
 });
+
+// Update toDo Items 
+router.route("/editToDo").post((req, res) => {
+    const checkedItemId = req.body.itemID;
+    const formattedName = req.body.listName;
+    const content = req.body.toDoContent;
+  
+    // toDo
+    List.findOneAndUpdate(
+      { formattedName: formattedName, "toDo._id": checkedItemId},
+      { "toDo.$.content" : content },
+      function (err) {
+        res.redirect("/" + formattedName);
+      }
+    ); 
+});
+
+
 
 module.exports = router;

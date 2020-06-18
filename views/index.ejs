@@ -18,9 +18,9 @@
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item">
         <form action="/done" method="post" class="inputForm">
-            <input type="checkbox" name="checkbox" value="<%= toDo._id %>" onchange="this.form.submit()">
-            <input type="text" class="toDo" value="<%= toDo.content %>"/>        
-            <input type="hidden" name="toDoContent" value="<%= toDo.content %>">
+            <input type="checkbox" onchange="this.form.submit()">
+            <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>"/>       
+            <input type="hidden" name="itemID" value="<%= toDo._id %>"> 
             <input type="hidden" name="listName" value="<%= showList.formattedName %>">
         </form>
         <!-- Delete Item form -->
@@ -38,7 +38,8 @@
       <form action="/addItem" method="post" class="item inputForm">
         <span class="plus">&#65291</span>
         <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="Add new item"/>
-        <button type="submit" class="btn btn-dark addNewBtn" name="list" value="<%= showList.formattedName %>">&#65291</button>
+        <input type="hidden" name="list" value="<%= showList.formattedName %>">
+        <button type="submit" class="btn btn-dark addNewBtn">&#65291</button>
       </form>
     </div>
   </div>
@@ -52,9 +53,8 @@
     <div class="doneItems item">
         <form class="inputForm" action="/toDoAgain" method="post">
             <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
-            <input type="text" class="done" value="<%= done.content %>" />
+            <input type="text" name="doneContent" class="done" value="<%= done.content %>" />
             <input type="hidden" name="doneID" value="<%= done._id %>">
-            <input type="hidden" name="doneContent" value="<%= done.content %>">
             <input type="hidden" name="doneListName" value="<%= showList.formattedName %>">
         </form>
         <!-- Delete Item form -->
