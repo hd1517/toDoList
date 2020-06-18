@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    // Hide sidebar
   $("#dismiss, .overlay").on("click", function () {
     // hide sidebar
     $("#sidebar").removeClass("active");
@@ -6,6 +7,7 @@ $(document).ready(function () {
     $(".overlay").removeClass("active");
   });
 
+  // Open sidebar
   $("#sidebarBtn").on("click", function () {
     // open sidebar
     $("#sidebar").addClass("active");
@@ -15,6 +17,7 @@ $(document).ready(function () {
     $("a[aria-expanded=true]").attr("aria-expanded", "false");
   });
 
+  // On mobile, hide sidebar after new list link is clicked
   $("#addNewListLink").on("click", function () {
     // hide sidebar
     $("#sidebar").removeClass("active");
@@ -22,10 +25,12 @@ $(document).ready(function () {
     $(".overlay").removeClass("active");
   });
 
+  // If list title already exists
   if ($(".errorMsg").text() != "") {
     $("#errorModal").modal("show");
   }
 
+  // Show close icon on item hover
   $(".item").hover(
     function () {
       $(this).find(".close").show();
@@ -35,14 +40,22 @@ $(document).ready(function () {
     }
   );
 
-  $(".listTitleLink").hover(
+  // Show close icon on list title hover
+  $(".listLink").hover(
     function () {
-      $(this).find("#deleteList").show();
+      $(this).find(".deleteList").show();
     },
     function () {
-      $(this).find("#deleteList").hide();
+      $(this).find(".deleteList").hide();
     }
   );
+
+  // Delete list on close icon click
+  $('.deleteList').click(function () {
+      let toDelete = $(this).siblings('.listID').val();
+      $('.listToDelete').attr('value', toDelete);
+      $('#confirmDelete').modal("show");
+  });
 
   
 });

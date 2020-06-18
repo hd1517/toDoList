@@ -10,7 +10,11 @@
   <ul class="list-unstyled components">
     <!-- <p>Lists</p> -->
     <% listTitles.forEach(listTitle => { %>
-    <li><a href="/<%= listTitle.formattedName %>" class="listTitleLink"><%= listTitle.name %><span id="deleteList" title="Delete List">&times;</span></a></li>
+    <li class="listLink">
+      <a href="/<%= listTitle.formattedName %>"><%= listTitle.name %></a>
+      <span class="deleteList" title="Delete List">&times;</span>
+      <input type="hidden" name="" class="listID" value="<%= listTitle._id %>">
+    </li>
     <% }); %>
     <li>
       <a
