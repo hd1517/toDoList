@@ -113,5 +113,16 @@ router.route("/redirect").post((req, res) => {
     }
 });
 
+// Delete list
+router.route("/deleteList").post((req, res) => {
+    const listToDelete = req.body.listToDelete;
+
+    List.findByIdAndRemove(listToDelete, function(err) {
+        if (!err) {
+            res.redirect("/");
+        }
+    });
+})
+
 
 module.exports = router;

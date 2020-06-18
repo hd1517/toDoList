@@ -53,7 +53,9 @@ $(document).ready(function () {
   // Delete list on close icon click
   $('.deleteList').click(function () {
       let toDelete = $(this).siblings('.listID').val();
+      let title = $(this).siblings('.titleOfList').text();
       $('.listToDelete').attr('value', toDelete);
+      $('#titleToDelete').text(title);
       $('#confirmDelete').modal("show");
   });
 
