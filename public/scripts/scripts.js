@@ -60,17 +60,10 @@ $(document).ready(function () {
   });
 
   // Edit on outside click
-    $(document).click(function(event) {
-      $targetClass = $(event.target).attr("class");
-      //console.log($targetClass);
+  $("input").change(function () {
+      console.log($(this).attr("class"));
+    
+    
+  });
 
- if ($targetClass === "toDo") {
-     console.log("Update toDo");
- } else if ($targetClass === "done") {
-    console.log("Update done");
-} else {
-    console.log("outside");
-}
-
-    });
 });
