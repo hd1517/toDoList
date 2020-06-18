@@ -26,10 +26,6 @@ $(document).ready(function () {
     $("#errorModal").modal("show");
   }
 
-  if (!$(".doneItems")[0]) {
-    $(".doneBox").hide();
-  }
-
   $(".item").hover(
     function () {
       $(this).find(".close").show();
@@ -38,4 +34,6 @@ $(document).ready(function () {
       $(this).find(".close").hide();
     }
   );
+
+
 });
