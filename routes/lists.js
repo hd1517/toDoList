@@ -33,8 +33,8 @@ const list1 = new List({
 const list2 = new List({
     name: "Work",
     formattedName: "work",
-    toDo: [item4, item2],
-    done: [item3, item1 ]
+    toDo: [item4],
+    done: []
 });
 
 const currentYear = new Date().getFullYear();
@@ -137,7 +137,6 @@ router.route("/editTitle").post((req, res) => {
           res.redirect("/" + newFormattedName);
         }
       ); 
-
 })
 
 

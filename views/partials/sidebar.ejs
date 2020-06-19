@@ -1,19 +1,19 @@
 <nav id="sidebar">
-  <div id="dismiss" class="showSidebar">
-    <i id="dismissArrow" class="fas fa-arrow-left"></i>
+  <div id="dismiss" class="mobileOn">
+    <i class="fas fa-arrow-left"></i>
   </div>
 
   <div class="sidebar-header">
-    <h2>Lists</h2>
+    <h1>Lists</h1>
   </div>
 
   <ul class="list-unstyled components">
     <!-- <p>Lists</p> -->
     <% listTitles.forEach(listTitle => { %>
     <li class="listLink">
-      <a href="/<%= listTitle.formattedName %>" class="titleOfList"><%= listTitle.name %></a>
-      <span class="deleteList" title="Delete List">&times;</span>
-      <input type="hidden" name="" class="listID" value="<%= listTitle._id %>">
+      <a href="/<%= listTitle.formattedName %>" class="titleOfList"><i class="fas fa-list-ul icon"></i><%= listTitle.name %></a>
+      <span class="deleteList mobileOn">&times;</span>
+      <input type="hidden" class="listID" value="<%= listTitle._id %>">
     </li>
     <% }); %>
     <li>
@@ -22,7 +22,7 @@
         data-toggle="modal"
         data-target="#newListTitleModal"
         id="addNewListLink"
-        >+ New List </a
+        ><i class="fas fa-plus icon"></i>New List </a
       >
     </li>
   </ul>

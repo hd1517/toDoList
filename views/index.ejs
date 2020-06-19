@@ -1,9 +1,9 @@
 <%- include("partials/header"); -%>
 
-<div>
-  <button type="button" id="sidebarBtn" class="showSidebar btn btn-info">
-    <i class="fas fa-align-left"></i>
-    <span></span>
+<div class="container">
+  <button type="button" id="sidebarBtn" class="showSidebar mobileOn btn btn-info">
+    <i class="fas fa-align-left mr-3"></i>
+    <span>Lists</span>
   </button>
 </div>
 
@@ -14,7 +14,7 @@
     <div class="headers">
       <h1></h1>
       <form action="/editTitle" method="post">
-        <input type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off">
+        <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off">
         <input type="hidden" name="formattedTitle" value="<%= showList.formattedName %>">
       </form>
       
@@ -22,7 +22,7 @@
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item">
-        <form action="/done" method="post" class="inputForm">
+        <form action="/done" method="post" class="editableForm">
             <input type="checkbox" onchange="this.form.submit()">
             <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>" autocomplete="off"/>       
             <input type="hidden" name="itemID" value="<%= toDo._id %>"> 
@@ -32,7 +32,7 @@
         <form action="/delete" method="post">
             <input type="hidden" name="deleteID" value="<%= toDo._id %>">
             <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
-            <button type="submit" class="close" name="deleteFrom" value="toDo" aria-label="Close">
+            <button type="submit" class="close mobileOn" name="deleteFrom" value="toDo" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </form>
@@ -44,7 +44,6 @@
         <span class="plus">&#65291</span>
         <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="Add new item"/>
         <input type="hidden" name="list" value="<%= showList.formattedName %>">
-        <button type="submit" class="btn btn-dark addNewBtn">&#65291</button>
       </form>
     </div>
   </div>
@@ -56,7 +55,7 @@
     </div>
     <% showList.done.forEach(function(done){ %>
     <div class="doneItems item">
-        <form class="inputForm" action="/toDoAgain" method="post">
+        <form class="editableForm" action="/toDoAgain" method="post">
             <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
             <input type="text" name="doneContent" class="done" value="<%= done.content %>" autocomplete="off"/>
             <input type="hidden" name="doneID" value="<%= done._id %>">
@@ -66,14 +65,14 @@
         <form action="/delete" method="post">
             <input type="hidden" name="deleteID" value="<%= done._id %>">
             <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
-            <button type="submit" class="close" name="deleteFrom" value="done" aria-label="Close">
+            <button type="submit" class="close mobileOn" name="deleteFrom" value="done" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
         </form>
               
     </div>
     <% }); %>
-    <div class="item">&nbsp</div> 
+    <div class="item space">&nbsp</div> 
   </div>
 
 </div>

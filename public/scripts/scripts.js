@@ -1,5 +1,12 @@
 $(document).ready(function () {
-    $(".newItem").focus();
+  // Focus on the newItem input on page load
+   $(".newItem").focus();
+
+  // Add active on sidebar link that has the same href as url pathname
+  const path = window.location.pathname;
+  $("a[href='" + path + "']")
+    .parent()
+    .addClass("active");
 
   // Hide sidebar
   $("#dismiss, .overlay").on("click", function () {
@@ -52,8 +59,21 @@ $(document).ready(function () {
     }
   );
 
+  // If on mobile, unbind hover
+  if ($(".mobileOn").css("display") != "none") {
+    $(".item").unbind();
+    $(".listLink").unbind();
+    if ($(".overlay.active").length > 0) {
+      $("#content").css("margin-right", "-250px");
+    }
+  }
+
   // Delete list on close icon click
   $(".deleteList").click(function () {
+    // hide sidebar
+    $("#sidebar").removeClass("active");
+    // hide overlay
+    $(".overlay").removeClass("active");
     let toDelete = $(this).siblings(".listID").val();
     let title = $(this).siblings(".titleOfList").text();
     $(".listToDelete").attr("value", toDelete);
@@ -61,21 +81,31 @@ $(document).ready(function () {
     $("#confirmDelete").modal("show");
   });
 
-  // On input change
+  // Submit forms on input change
   $("input").change(function () {
-      let inputArea = $(this).attr("class");
+    let inputArea = $(this).attr("class");
 
-      if (inputArea === "toDo") { 
-          $(this).parent().attr("action", "/editToDo").submit();
-      } else if (inputArea === "done") {
-          $(this).parent().attr("action", "/editDone").submit();
-      } else if (inputArea === "newItem") {
-          $(this).parent().submit();
-      } else if (inputArea === "listTitleInput") {
-          $(this).parent().submit();
-      }
+    switch (inputArea) {
+      case "toDo":
+        $(this).parent().attr("action", "/editToDo").submit();
+        break;
+      case "done":
+        $(this).parent().attr("action", "/editDone").submit();
+        break;
+      case "newItem":
+        $(this).parent().submit();
+        break;
+      case "listTitleInput":
+        $(this).parent().submit();
+        break;
+      case "form-control myModalInput":
+        $(this).parent().parent().submit();
+        break;
+    }
   });
 
-
-
+  // On add new list modal show, focus on input
+  $('#newListTitleModal').on('shown.bs.modal', function() {
+    $('#newTitleInput').focus();
+  })
 });
