@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3000;
@@ -9,13 +10,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 app.set("view engine", "ejs");
 
-// local database
-mongoose.connect("mongodb://localhost:27017/todoDB", {
-  useNewUrlParser: true,
+// Database connect
+const uri = process.env.ATLAS_URI;
+mongoose.connect(uri, { 
+  useNewUrlParser: true, 
   useUnifiedTopology: true,
-  useFindAndModify: false
-});
-mongoose.connection.once("open", () => {
+  useFindAndModify: false });
+const connection = mongoose.connection;
+connection.once("open", () => {
   console.log("MongoDB database connection established.");
 });
 
