@@ -107,5 +107,5 @@ $(document).ready(function () {
   // On add new list modal show, focus on input
   $('#newListTitleModal').on('shown.bs.modal', function() {
     $('#newTitleInput').focus();
-  })
+  });
 });
