@@ -13,27 +13,19 @@
      <!-- List Title -->
      <div class="headers">
       <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off"/>
-      <input type="hidden" class="listTitleID" value="<%= showList._id %>"/>
+      <input type="hidden" class="listID" value="<%= showList._id %>"/>
     </div>
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>
-    <div class="toDoItems item">
-        <form action="/done" method="post" class="editableForm">
-            <input type="checkbox" onchange="this.form.submit()">
+    <div class="toDoItems item item<%= toDo._id %>">
+            <input type="checkbox" class="toDoCheckbox">
             <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>" autocomplete="off"/>       
             <input type="hidden" class="itemID" value="<%= toDo._id %>"> 
             <input type="hidden" class="listID" value="<%= showList._id %>">
-        </form>
-        <!-- Delete Item form -->
-        <form action="/delete" method="post">
-            <input type="hidden" name="deleteID" value="<%= toDo._id %>">
-            <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
-            <button type="submit" class="close mobileOn" name="deleteFrom" value="toDo" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </form>
+            <button type="button" class="close mobileOn deleteFrom" value="toDo" aria-label="Delete">&times;</button>
     </div>
     <% }); %>
+
     <!-- Add New Item Input -->
     <div class="toDoItems item addNewItem">
       <form action="/addItem" method="post" class="item inputForm">
@@ -50,22 +42,12 @@
         <h4>Completed Tasks</h4>
     </div>
     <% showList.done.forEach(function(done){ %>
-    <div class="doneItems item">
-        <form class="editableForm" action="/toDoAgain" method="post">
-            <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
-            <input type="text" name="doneContent" class="done" value="<%= done.content %>" autocomplete="off"/>
-            <input type="hidden" name="doneID" value="<%= done._id %>">
-            <input type="hidden" name="doneListID" value="<%= showList._id %>">
-        </form>
-        <!-- Delete Item form -->
-        <form action="/delete" method="post">
-            <input type="hidden" name="deleteID" value="<%= done._id %>">
-            <input type="hidden" name="deleteListName" value="<%= showList.formattedName %>">
-            <button type="submit" class="close mobileOn" name="deleteFrom" value="done" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </form>
-              
+    <div class="doneItems item doneItem<%= done._id %>">
+            <input type="checkbox" class="doneCheckbox" checked>
+            <input type="text" class="done" value="<%= done.content %>" autocomplete="off"/>
+            <input type="hidden" class="itemID" value="<%= done._id %>">
+            <input type="hidden" class="listID" value="<%= showList._id %>">
+            <button type="button" class="close mobileOn deleteFrom" value="done" aria-label="Delete">&times;</button>
     </div>
     <% }); %>
     <div class="item space">&nbsp</div> 

@@ -135,8 +135,8 @@ router.route("/editTitle").post((req, res) => {
   List.findByIdAndUpdate(
     { _id: listTitleID },
     { name: newTitle, formattedName: newFormattedName },
-    function (err) {
-      res.redirect("/" + newFormattedName);
+    function (err, result) {
+      res.send(result);
     }
   );
 });

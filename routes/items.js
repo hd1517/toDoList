@@ -57,29 +57,29 @@ router.route("/toDoAgain").post((req, res) => {
 // Delete items
 router.route("/delete").post((req, res) => {
   const deleteID = req.body.deleteID;
-  const deleteListName = req.body.deleteListName;
+  const deleteListID = req.body.deleteListID;
   const deleteFrom = req.body.deleteFrom;
 
   if (deleteFrom === "toDo") {
     List.findOneAndUpdate(
-      { formattedName: deleteListName },
+      { _id: deleteListID },
       {
         $pull: { toDo: { _id: deleteID } },
       },
-      function (err) {
-        res.redirect("/" + deleteListName);
+      function (err, result) {
+        res.send(result);
       }
     );
   }
 
   if (deleteFrom === "done") {
     List.findOneAndUpdate(
-      { formattedName: deleteListName },
+      { _id: deleteListID },
       {
         $pull: { done: { _id: deleteID } },
       },
-      function (err) {
-        res.redirect("/" + deleteListName);
+      function (err, result) {
+        res.send(result);
       }
     );
   }

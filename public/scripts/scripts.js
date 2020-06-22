@@ -84,33 +84,31 @@ $(document).ready(function () {
   // On input change
   $("input").change(function () {
     let inputArea = $(this).attr("class");
+    itemID = $(this).siblings(".itemID").val();
+    listID = $(this).siblings(".listID").val();
+    content = $(this).val();
 
     switch (inputArea) {
       // Update list Title
       case "listTitleInput":
-        let listTitleID = $(this).siblings(".listTitleID").val();
-        let newListTitle = $(this).val();
         $.ajax({
           dataType: "text",
           method: "post",
           url: "/editTitle",
           data: {
-            newListTitle: newListTitle,
-            listTitleID: listTitleID,
+            newListTitle: content,
+            listTitleID: listID,
           },
           success: function () {
             // Update sidebar list title
-            $('.listID:input[value="' + listTitleID + '"]')
+            $('.listID:input[value="' + listID + '"]')
               .siblings(".titleOfList")
-              .html('<i class="fas fa-list-ul icon"></i>' + newListTitle);
+              .html('<i class="fas fa-list-ul icon"></i>' + content);
           },
         });
         break;
       // Update items in toDo
       case "toDo":
-      let itemID = $(this).siblings(".itemID").val();
-      let listID = $(this).siblings(".listID").val();
-      let content = $(this).val();
         $.ajax({
           dataType: "text",
           method: "post",
@@ -124,7 +122,16 @@ $(document).ready(function () {
         break;
       // Update items in done
       case "done":
-        $(this).parent().attr("action", "/editDone").submit();
+          $.ajax({
+            dataType: "text",
+            method: "post",
+            url: "/editDone",
+            data: {
+              doneID: itemID,
+              doneListID: listID,
+              doneContent: content,
+            },
+          });
         break;
       case "newItem":
         $(this).parent().submit();
@@ -134,6 +141,31 @@ $(document).ready(function () {
         $(this).parent().parent().submit();
         break;
     }
+  });
+
+  // On item delete
+  $("button[type='button']").click(function () {
+    let deleteID = $(this).siblings(".itemID").val();
+    let deleteListID = $(this).siblings(".listID").val();
+    let deleteFrom = $(this).val();
+
+    $.ajax({
+      dataType: "text",
+      method: "post",
+      url: "/delete",
+      data: {
+        deleteID: deleteID,
+        deleteListID: deleteListID,
+        deleteFrom: deleteFrom,
+      },
+      success: function () {
+        if (deleteFrom === "toDo") {
+          $(".item" + deleteID).remove();
+        } else {
+          $(".doneItem" + deleteID).remove();
+        }
+      },
+    });
   });
 
   // On add new list modal show, focus on input
