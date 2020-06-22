@@ -109,7 +109,7 @@ $(document).ready(function () {
       // Update items in toDo
       case "toDo":
       let itemID = $(this).siblings(".itemID").val();
-      let listName = $(this).siblings(".listName").val();
+      let listID = $(this).siblings(".listID").val();
       let content = $(this).val();
         $.ajax({
           dataType: "text",
@@ -117,7 +117,7 @@ $(document).ready(function () {
           url: "/editToDo",
           data: {
             itemID: itemID,
-            listName: listName,
+            listID: listID,
             toDoContent: content,
           },
         });

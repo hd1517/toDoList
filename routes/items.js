@@ -88,15 +88,17 @@ router.route("/delete").post((req, res) => {
 // Update toDo Items 
 router.route("/editToDo").post((req, res) => {
     const checkedItemId = req.body.itemID;
-    const formattedName = req.body.listName;
+    const listID = req.body.listID;
     const content = req.body.toDoContent;
   
     // toDo
     List.findOneAndUpdate(
-      { formattedName: formattedName, "toDo._id": checkedItemId},
+      { _id: listID, "toDo._id": checkedItemId},
       { "toDo.$.content" : content },
       function (err) {
-        res.redirect("/" + formattedName);
+        if (err) {
+          console.log(err)
+        }
       }
     ); 
 });
