@@ -125,6 +125,7 @@ $(document).ready(function () {
       // Move from toDo to done
       case "toDoCheckbox":
         $(this).prop("checked", true);
+        content = $(this).siblings(".toDo").val();
         $.ajax({
           dataType: "text",
           method: "post",
