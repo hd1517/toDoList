@@ -11,15 +11,26 @@ app.use(express.static("public"));
 app.set("view engine", "ejs");
 
 // Database connect
-const uri = process.env.ATLAS_URI;
-mongoose.connect(uri, { 
-  useNewUrlParser: true, 
+// const uri = process.env.ATLAS_URI;
+// mongoose.connect(uri, { 
+//   useNewUrlParser: true, 
+//   useUnifiedTopology: true,
+//   useFindAndModify: false });
+// const connection = mongoose.connection;
+// connection.once("open", () => {
+//   console.log("MongoDB database connection established.");
+// });
+
+// local database
+mongoose.connect("mongodb://localhost:27017/todoDB", {
+  useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false });
-const connection = mongoose.connection;
-connection.once("open", () => {
+  useFindAndModify: false
+});
+mongoose.connection.once("open", () => {
   console.log("MongoDB database connection established.");
 });
+
 
 // Routes
 const listRouter = require("./routes/lists");

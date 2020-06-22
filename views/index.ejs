@@ -10,13 +10,11 @@
 <div class="container" id="listContainer">
     <!-- Box for list title and things to do -->
   <div class="box">
-      <!-- List Title -->
-    <div class="headers">
-      <form action="/editTitle" method="post">
-        <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off">
-        <input type="hidden" name="formattedTitle" value="<%= showList.formattedName %>">
-      </form>
-      
+     <!-- List Title -->
+     <div class="headers">
+      <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off"/>
+      <input type="hidden" class="formattedTitle" value="<%= showList.formattedName %>"/>
+      <input type="hidden" class="listTitleID" value="<%= showList._id %>"/>
     </div>
     <!-- To Do Items -->
     <% showList.toDo.forEach(function(toDo){ %>

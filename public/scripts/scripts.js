@@ -81,11 +81,32 @@ $(document).ready(function () {
     $("#confirmDelete").modal("show");
   });
 
-  // Submit forms on input change
+  // On input change
   $("input").change(function () {
     let inputArea = $(this).attr("class");
 
     switch (inputArea) {
+      // Update list Title
+      case "listTitleInput":
+        let listTitleID = $(this).siblings(".listTitleID").val();
+        let newListTitle = $(this).val();
+        let formattedTitle = $(this).siblings(".formattedTitle").val();
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/editTitle",
+          data: {
+            newListTitle: newListTitle,
+            formattedTitle: formattedTitle,
+          },
+          success: function () {
+            // Update sidebar list title
+            $('.listID:input[value="' + listTitleID + '"]')
+              .siblings(".titleOfList")
+              .html('<i class="fas fa-list-ul icon"></i>' + newListTitle);
+          },
+        });
+        break;
       case "toDo":
         $(this).parent().attr("action", "/editToDo").submit();
         break;
@@ -95,9 +116,7 @@ $(document).ready(function () {
       case "newItem":
         $(this).parent().submit();
         break;
-      case "listTitleInput":
-        $(this).parent().submit();
-        break;
+      
       case "form-control myModalInput":
         $(this).parent().parent().submit();
         break;
