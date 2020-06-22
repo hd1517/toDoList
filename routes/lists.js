@@ -124,14 +124,16 @@ router.route("/deleteList").post((req, res) => {
 
 });
 
+var ObjectId = require('mongoose').Types.ObjectId; 
+
 // Update list title
 router.route("/editTitle").post((req, res) => {
   let newTitle = _.capitalize(req.body.newListTitle);
   let newFormattedName = _.lowerCase(newTitle).replace(/[^a-zA-Z0-9]/g, "_");
-  const oldFormattedName = req.body.formattedTitle;
+  const listTitleID = req.body.listTitleID;
 
-  List.findOneAndUpdate(
-    { formattedName: oldFormattedName },
+  List.findByIdAndUpdate(
+    { _id: listTitleID },
     { name: newTitle, formattedName: newFormattedName },
     function (err) {
       res.redirect("/" + newFormattedName);

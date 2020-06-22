@@ -13,7 +13,6 @@
      <!-- List Title -->
      <div class="headers">
       <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off"/>
-      <input type="hidden" class="formattedTitle" value="<%= showList.formattedName %>"/>
       <input type="hidden" class="listTitleID" value="<%= showList._id %>"/>
     </div>
     <!-- To Do Items -->
@@ -22,8 +21,8 @@
         <form action="/done" method="post" class="editableForm">
             <input type="checkbox" onchange="this.form.submit()">
             <input type="text" name="toDoContent" class="toDo" value="<%= toDo.content %>" autocomplete="off"/>       
-            <input type="hidden" name="itemID" value="<%= toDo._id %>"> 
-            <input type="hidden" name="listName" value="<%= showList.formattedName %>">
+            <input type="hidden" class="itemID" value="<%= toDo._id %>"> 
+            <input type="hidden" class="listName" value="<%= showList.formattedName %>">
         </form>
         <!-- Delete Item form -->
         <form action="/delete" method="post">

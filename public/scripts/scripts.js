@@ -90,14 +90,13 @@ $(document).ready(function () {
       case "listTitleInput":
         let listTitleID = $(this).siblings(".listTitleID").val();
         let newListTitle = $(this).val();
-        let formattedTitle = $(this).siblings(".formattedTitle").val();
         $.ajax({
           dataType: "text",
           method: "post",
           url: "/editTitle",
           data: {
             newListTitle: newListTitle,
-            formattedTitle: formattedTitle,
+            listTitleID: listTitleID,
           },
           success: function () {
             // Update sidebar list title
@@ -107,9 +106,23 @@ $(document).ready(function () {
           },
         });
         break;
+      // Update items in toDo
       case "toDo":
-        $(this).parent().attr("action", "/editToDo").submit();
+      let itemID = $(this).siblings(".itemID").val();
+      let listName = $(this).siblings(".listName").val();
+      let content = $(this).val();
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/editToDo",
+          data: {
+            itemID: itemID,
+            listName: listName,
+            toDoContent: content,
+          },
+        });
         break;
+      // Update items in done
       case "done":
         $(this).parent().attr("action", "/editDone").submit();
         break;
