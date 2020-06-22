@@ -21,17 +21,21 @@ router.route("/addItem").post((req, res) => {
 // Move toDo item to done
 router.route("/done").post((req, res) => {
   const checkedItemId = req.body.itemID;
-  const formattedName = req.body.listName;
+  const listID = req.body.listID;
   const content = req.body.toDoContent;
 
   List.findOneAndUpdate(
-    { formattedName: formattedName },
+    { _id: listID },
     {
       $push: { done: { _id: checkedItemId, content: content } },
       $pull: { toDo: { _id: checkedItemId } },
     },
-    function (err) {
-      res.redirect("/" + formattedName);
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      } else {
+        res.send(result);
+      }
     }
   );
 });

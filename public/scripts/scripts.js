@@ -107,6 +107,7 @@ $(document).ready(function () {
           },
         });
         break;
+
       // Update items in toDo
       case "toDo":
         $.ajax({
@@ -120,6 +121,7 @@ $(document).ready(function () {
           },
         });
         break;
+
       // Update items in done
       case "done":
           $.ajax({
@@ -133,6 +135,39 @@ $(document).ready(function () {
             },
           });
         break;
+
+      // Move from toDo to done
+      case "toDoCheckbox":
+        content = $(this).siblings(".toDo").val();
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/done",
+          data: {
+            itemID: itemID,
+            listID: listID,
+            toDoContent: content,
+          },
+          success: function () {
+            $(".item" + itemID).insertBefore(".space");
+            $(".item" + itemID)
+              .children(".toDoCheckbox")
+              .addClass("doneCheckbox")
+              .removeClass("toDoCheckbox");
+            $(".item" + itemID)
+              .children(".toDo")
+              .addClass("done")
+              .removeClass("toDo");
+            $(".item" + itemID)
+              .children(".deleteFrom")
+              .attr("value", "done");
+            $(".item" + itemID)
+              .addClass("doneItem" + itemID)
+              .removeClass("item" + itemID);
+          },
+        });
+        break;
+
       case "newItem":
         $(this).parent().submit();
         break;
