@@ -168,6 +168,38 @@ $(document).ready(function () {
         });
         break;
 
+        // Move from done to toDo
+      case "doneCheckbox":
+        content = $(this).siblings(".done").val();
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/toDoAgain",
+          data: {
+            doneID: itemID,
+            doneListID: listID,
+            doneContent: content,
+          },
+          success: function () {
+            $(".doneItem" + itemID).insertBefore(".addNewItem");
+            $(".doneItem" + itemID)
+              .children(".doneCheckbox")
+              .addClass("toDoCheckbox")
+              .removeClass("doneCheckbox");
+            $(".doneItem" + itemID)
+              .children(".done")
+              .addClass("toDo")
+              .removeClass("done");
+            $(".doneItem" + itemID)
+              .children(".deleteFrom")
+              .attr("value", "toDo");
+            $(".doneItem" + itemID)
+              .addClass("item" + itemID)
+              .removeClass("doneItem" + itemID);
+          },
+        });
+        break;
+
       case "newItem":
         $(this).parent().submit();
         break;
