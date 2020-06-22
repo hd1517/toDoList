@@ -55,7 +55,7 @@
             <input type="checkbox" name="doneCheck" onchange="this.form.submit()" checked>
             <input type="text" name="doneContent" class="done" value="<%= done.content %>" autocomplete="off"/>
             <input type="hidden" name="doneID" value="<%= done._id %>">
-            <input type="hidden" name="doneListName" value="<%= showList.formattedName %>">
+            <input type="hidden" name="doneListID" value="<%= showList._id %>">
         </form>
         <!-- Delete Item form -->
         <form action="/delete" method="post">

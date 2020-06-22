@@ -97,7 +97,7 @@ router.route("/editToDo").post((req, res) => {
       { "toDo.$.content" : content },
       function (err) {
         if (err) {
-          console.log(err)
+          console.log(err);
         }
       }
     ); 
@@ -106,15 +106,17 @@ router.route("/editToDo").post((req, res) => {
 // Update done Items 
 router.route("/editDone").post((req, res) => {
     const checkedItemId = req.body.doneID;
-    const formattedName = req.body.doneListName;
+    const listID = req.body.doneListID;
     const content = req.body.doneContent;
   
     // toDo
     List.findOneAndUpdate(
-      { formattedName: formattedName, "done._id": checkedItemId},
+      { _id: listID, "done._id": checkedItemId},
       { "done.$.content" : content },
       function (err) {
-        res.redirect("/" + formattedName);
+        if (err) {
+          console.log(err);
+        }
       }
     ); 
 });
