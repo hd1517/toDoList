@@ -1,6 +1,6 @@
 $(document).ready(function () {
   // Focus on the newItem input on page load
-   $(".newItem").focus();
+  $(".newItem").focus();
 
   // Add active on sidebar link that has the same href as url pathname
   const path = window.location.pathname;
@@ -91,21 +91,7 @@ $(document).ready(function () {
     switch (inputArea) {
       // Update list Title
       case "listTitleInput":
-        $.ajax({
-          dataType: "text",
-          method: "post",
-          url: "/editTitle",
-          data: {
-            newListTitle: content,
-            listTitleID: listID,
-          },
-          success: function () {
-            // Update sidebar list title
-            $('.listID:input[value="' + listID + '"]')
-              .siblings(".titleOfList")
-              .html('<i class="fas fa-list-ul icon"></i>' + content);
-          },
-        });
+        $(this).parent().submit();
         break;
 
       // Update items in toDo
@@ -124,16 +110,16 @@ $(document).ready(function () {
 
       // Update items in done
       case "done":
-          $.ajax({
-            dataType: "text",
-            method: "post",
-            url: "/editDone",
-            data: {
-              doneID: itemID,
-              doneListID: listID,
-              doneContent: content,
-            },
-          });
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/editDone",
+          data: {
+            doneID: itemID,
+            doneListID: listID,
+            doneContent: content,
+          },
+        });
         break;
 
       // Move from toDo to done
@@ -168,7 +154,7 @@ $(document).ready(function () {
         });
         break;
 
-        // Move from done to toDo
+      // Move from done to toDo
       case "doneCheckbox":
         content = $(this).siblings(".done").val();
         $.ajax({
@@ -209,17 +195,27 @@ $(document).ready(function () {
             newItem: content,
             listID: listID,
           },
-          success: function(data) {
+          success: function (data) {
             newItemID = JSON.parse(data);
-            $(".template").clone(true).insertBefore(".addNewItem").addClass("item" + newItemID).removeClass("template");
-            $(".item" + newItemID).children(".toDo").attr("value", content);
-            $(".item" + newItemID).children(".itemID").attr("value", newItemID);
-            $(".item" + newItemID).children(".listID").attr("value", listID);
+            $(".template")
+              .clone(true)
+              .insertBefore(".addNewItem")
+              .addClass("item" + newItemID)
+              .removeClass("template");
+            $(".item" + newItemID)
+              .children(".toDo")
+              .attr("value", content);
+            $(".item" + newItemID)
+              .children(".itemID")
+              .attr("value", newItemID);
+            $(".item" + newItemID)
+              .children(".listID")
+              .attr("value", listID);
             $(".newItem").val("");
           },
         });
         break;
-      
+
       // Create new list
       case "form-control myModalInput":
         $(this).parent().parent().submit();
@@ -253,7 +249,7 @@ $(document).ready(function () {
   });
 
   // On add new list modal show, focus on input
-  $('#newListTitleModal').on('shown.bs.modal', function() {
-    $('#newTitleInput').focus();
+  $("#newListTitleModal").on("shown.bs.modal", function () {
+    $("#newTitleInput").focus();
   });
 });

@@ -2,8 +2,7 @@
 
 <div class="container">
   <button type="button" id="sidebarBtn" class="showSidebar mobileOn btn btn-info">
-    <i class="fas fa-align-left mr-3"></i>
-    <span>Lists</span>
+    <span>L I S T S</span>
   </button>
 </div>
 
@@ -11,9 +10,12 @@
     <!-- Box for list title and things to do -->
   <div class="box">
      <!-- List Title -->
-     <div class="headers">
-      <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off"/>
-      <input type="hidden" class="listID" value="<%= showList._id %>"/>
+    <div class="headers">
+     <form action="/editTitle" method="post">
+       <input data-toggle="tooltip" data-placement="bottom" title="Click to edit title" type="text" class="listTitleInput" name="newListTitle" value="<%= showList.name %>" autocomplete="off">
+       <input type="hidden" name="listTitleID" value="<%= showList._id %>">
+       <input type="hidden" name="originalFormattedName" value="<%= showList.formattedName %>">
+     </form>
     </div>
     <!-- To Do Items -->
     <div class="toDoItems item template">

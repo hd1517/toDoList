@@ -111,7 +111,7 @@ router.route("/redirect").post((req, res) => {
   if (errorMsg != "") {
     errorMsg = "";
     res.redirect("/" + urlParam);
-  }
+  } 
 });
 
 // Delete list
@@ -130,15 +130,34 @@ var ObjectId = require('mongoose').Types.ObjectId;
 router.route("/editTitle").post((req, res) => {
   let newTitle = _.capitalize(req.body.newListTitle);
   let newFormattedName = _.lowerCase(newTitle).replace(/[^a-zA-Z0-9]/g, "_");
+  let oldFormattedName = req.body.originalFormattedName;
   const listTitleID = req.body.listTitleID;
+  let count;
 
-  List.findByIdAndUpdate(
-    { _id: listTitleID },
-    { name: newTitle, formattedName: newFormattedName },
-    function (err, result) {
-      res.send(result);
+  List.countDocuments({formattedName: newFormattedName}, function(err, found) {
+    count = found;
+    if (count === 0) {
+      List.findByIdAndUpdate(
+        { _id: listTitleID },
+        { name: newTitle, formattedName: newFormattedName },
+        function (err, result) {
+          if (err) {
+            console.log(err);
+          } else {
+            res.redirect("/" + newFormattedName);
+          }
+        }
+      );
+    } else {
+      errorMsg =
+        "A list with this title already exists, please choose a different title.";
+      urlParam = oldFormattedName;
+      res.redirect("/" + oldFormattedName);
     }
-  );
+});
+
+  
+  
 });
 
 module.exports = router;

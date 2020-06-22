@@ -11,7 +11,7 @@
     <!-- <p>Lists</p> -->
     <% listTitles.forEach(listTitle => { %>
     <li class="listLink">
-      <a href="/<%= listTitle.formattedName %>" class="titleOfList"><i class="fas fa-list-ul icon"></i><%= listTitle.name %></a>
+      <a href="/<%= listTitle.formattedName %>" class="titleOfList listTitle<%= listTitle._id %>"><i class="fas fa-list-ul icon"></i><%= listTitle.name %></a>
       <span class="deleteList mobileOn">&times;</span>
       <input type="hidden" class="listID" value="<%= listTitle._id %>">
     </li>
