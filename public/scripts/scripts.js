@@ -201,9 +201,26 @@ $(document).ready(function () {
         break;
 
       case "newItem":
-        $(this).parent().submit();
+        $.ajax({
+          dataType: "text",
+          method: "post",
+          url: "/addItem",
+          data: {
+            newItem: content,
+            listID: listID,
+          },
+          success: function(data) {
+            newItemID = JSON.parse(data);
+            $(".template").clone(true).insertBefore(".addNewItem").addClass("item" + newItemID).removeClass("template");
+            $(".item" + newItemID).children(".toDo").attr("value", content);
+            $(".item" + newItemID).children(".itemID").attr("value", newItemID);
+            $(".item" + newItemID).children(".listID").attr("value", listID);
+            $(".newItem").val("");
+          },
+        });
         break;
       
+      // Create new list
       case "form-control myModalInput":
         $(this).parent().parent().submit();
         break;

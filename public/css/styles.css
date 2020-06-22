@@ -192,6 +192,10 @@ a:focus {
 }
 
 /* Items */
+.template {
+  display: none !important;
+}
+
 .item {
   min-height: 30px;
   display: flex;

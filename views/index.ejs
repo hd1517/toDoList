@@ -16,6 +16,13 @@
       <input type="hidden" class="listID" value="<%= showList._id %>"/>
     </div>
     <!-- To Do Items -->
+    <div class="toDoItems item template">
+      <input type="checkbox" class="toDoCheckbox">
+      <input type="text" name="toDoContent" class="toDo" value="" autocomplete="off"/>       
+      <input type="hidden" class="itemID" value=""> 
+      <input type="hidden" class="listID" value="">
+      <button type="button" class="close mobileOn deleteFrom" value="toDo" aria-label="Delete">&times;</button>
+    </div>
     <% showList.toDo.forEach(function(toDo){ %>
     <div class="toDoItems item item<%= toDo._id %>">
             <input type="checkbox" class="toDoCheckbox">
@@ -28,11 +35,11 @@
 
     <!-- Add New Item Input -->
     <div class="toDoItems item addNewItem">
-      <form action="/addItem" method="post" class="item inputForm">
+      <!-- <form action="/addItem" method="post" class="item inputForm"> -->
         <span class="plus">&#65291</span>
-        <input type="text" class="newItem" name="newItem" autocomplete="off" placeholder="Add new item"/>
-        <input type="hidden" name="list" value="<%= showList.formattedName %>">
-      </form>
+        <input type="text" class="newItem" autocomplete="off" placeholder="Add new item"/>
+        <input type="hidden" class="listID" value="<%= showList._id %>">
+      <!-- </form> -->
     </div>
   </div>
 

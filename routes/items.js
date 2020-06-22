@@ -5,17 +5,19 @@ let List = require("../models/listModel");
 // Add item to specific list depending on route parameter
 router.route("/addItem").post((req, res) => {
   const newItem = req.body.newItem;
-  const forList = req.body.list;
+  const forList = req.body.listID;
 
-  List.findOne({ formattedName: forList }, function (err, addToList) {
+  List.findOne({ _id: forList }, function (err, addToList) {
     const item = {
       content: newItem,
     };
     addToList.toDo.push(item);
-    addToList.save();
+    addToList.save(function(err, list){
+      res.json(list.toDo[list.toDo.length -1]._id);
+    });
   });
 
-  res.redirect("/" + forList);
+  //res.redirect("/" + forList);
 });
 
 // Move toDo item to done
